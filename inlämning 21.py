@@ -8,7 +8,7 @@ def kort_lek() -> list[int]:
 class Spelare:
     def __init__(self) -> None:
         # skapar en lista för att hålla koll på spelarens kort.
-        self.hand = []
+        self.hand: list[int] =  []
      # metod för att dra ett kort från leken.
     def dra_kort(self, deck: list[int]) -> None:
         #blanda kortleken innan man dra ett kort för att simulera slump.
@@ -21,7 +21,7 @@ class Spelare:
       
       #metoden för räkna den totala poängen av kortren i spelarens hand.
     def räkna_kort(self) -> int: 
-        total = sum(self.hand) # summerar alla kort i spelarens hand 
+        total: int = sum(self.hand) # summerar alla kort i spelarens hand 
        # om spelaren ta upp ett ess och totalen översitger 21      
         if total > 21 and 11 in self.hand:
             #ändras essets värde från 11 till 1.
@@ -35,7 +35,7 @@ class NPC:
 
     def __init__(self) -> None:
         # skapar en lista för att hålla koll på npc kort.
-        self.npc_hand = []
+        self.npc_hand: list [int]= []
 # metod för att dra ett kort från leken.
     def dra_kort(self, deck: list[int]) -> None:
          #blanda kortleken innan man dra ett kort för att simulera slump.
@@ -48,7 +48,7 @@ class NPC:
  
  #metoden för räkna den totala poängen av kortren i npcs hand.
     def räkna_kort(self) -> int:
-        total = sum(self.npc_hand) #summerar alla kort i Npc hand 
+        total:int = sum(self.npc_hand) #summerar alla kort i Npc hand 
         # om npc tar upp ett ess och totalen översitger 21 
         if total > 21 and 11 in self.npc_hand:
              #ändras essets värde från 11 till 1.
@@ -60,7 +60,7 @@ class NPC:
 class huvudspelet:
     def __init__(self, deck: list [int]) -> None:
         #tilldelar den skapade kortleken till spelet.
-        self.deck = deck
+        self.deck: list [int] = deck
         #skapar instanser av klassen spelare och npc för att kunna köra klasserna i huvudklassen 
         self.spelare = Spelare()
         self.npc = NPC()
@@ -68,8 +68,8 @@ class huvudspelet:
            # metod som hanterar spelets vinnare och strukturera turer i spelet.
     def winner_winner(self) -> None:
         #räknar första poängen för både spelare och npc
-        spelarens_poäng = self.spelare.räkna_kort()
-        npc_poäng = self.npc.räkna_kort()
+        spelarens_poäng: int = self.spelare.räkna_kort()
+        npc_poäng: int = self.npc.räkna_kort()
         # en loop som kör til att spelaren tar upp ett kort.
         while True:
             self.spelare.dra_kort(self.deck)
@@ -80,7 +80,7 @@ class huvudspelet:
             if poäng > 21: 
                 print("spelarens fick över 21, Npc vann!") # skriver ut resultatet 
                 return 
-            välj = input("vill dra ett kort eller stanna? (ja/nej): ") # inputen som hanterar spelarens val ifall spelaren vill dra ett kort eller stanna
+            välj: str = input("vill dra ett kort eller stanna? (ja/nej): ") # inputen som hanterar spelarens val ifall spelaren vill dra ett kort eller stanna
             if välj != 'ja':
                 break 
         # en loop som körs tills att npc har nått minst 17 poäng.
